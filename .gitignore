@@ -1,3 +1,4 @@
 *.user
-TravellingThief\TravellingThief\bin
-TravellingThief\TravellingThief\obj
+TravellingThief/TravellingThief/bin
+TravellingThief/TravellingThief/obj
+TravellingThief/.vs
