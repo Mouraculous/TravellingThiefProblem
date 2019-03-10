@@ -68,7 +68,7 @@ namespace TravellingThief.TTP
                     .ToList();
 
                 currentPopulation = _evaluator.EvaluatePopulation(currentPopulation, _simulationParameters).ToList();
-                initialPopulation = currentPopulation.Clone;
+                initialPopulation = currentPopulation;
 
                 _logger.Log(i + 1, currentPopulation);
             }

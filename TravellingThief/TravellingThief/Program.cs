@@ -8,8 +8,6 @@ namespace TravellingThief
 {
     class Program
     {
-        private const int POPULATION = 200;
-
         static void Main(string[] args)
         {
             var parser = new TextToSimModelParser();
@@ -30,7 +28,7 @@ namespace TravellingThief
                 crossBreeder, populationGenerator);
 
             simulation.Run(Config.Generations, Config.CrossoverProbability, Config.MutationProbability,
-                Config.Population);
+                Config.Population); 
 
             Console.WriteLine("FINITO");
             Console.Read();
