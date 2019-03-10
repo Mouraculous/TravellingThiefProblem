@@ -1,4 +1,4 @@
-## Welcome to GitHub Pages
+## Travelling Thief Problem: Evolutionary Algorithm
 
 This repository contains my proposition of a solution for Travelling Thief Problem (later called TTP).
 
