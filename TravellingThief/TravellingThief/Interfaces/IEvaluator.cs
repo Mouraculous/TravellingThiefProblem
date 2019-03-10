@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Data;
 using System.Text;
 using TravellingThief.Models;
+using TravellingThief.TTP;
 
 namespace TravellingThief.Interfaces
 {
-    interface IEvaluator
+    public interface IEvaluator
     {
-        double Evaluate(City[] cities);
+        Individual EvaluateIndividual(Individual individual, ISimulationParameters simulationParams);
+        IEnumerable<Individual> EvaluatePopulation(IEnumerable<Individual> population, ISimulationParameters simulationParams);
     }
 }

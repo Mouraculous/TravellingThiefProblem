@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using TravellingThief.Preparation;
+using TravellingThief.Statistics;
 using TravellingThief.TTP;
 
 namespace TravellingThief
@@ -13,20 +14,24 @@ namespace TravellingThief
         {
             var parser = new TextToSimModelParser();
             var provider = new FromFileDataProvider();
-            var setup = new Setup();
+            var populationGenerator = new PopulationGenerator();
             var selector = new GreedyItemSelector();
+            var mutator = new Mutator();
+            var popLogger = new FilePopulationLogger();
+            var evaluator = new Evaluator(selector);
+            var crossoverSelector = new RouletteSelector();
+            var crossBreeder = new CrossBreeder();
 
             var problem = provider.Get();
 
             var model = parser.Parse(problem.ToArray());
 
-            var population = setup.GeneratePopulation(POPULATION, model.SimulationParams).ToArray();
-            
-            Console.WriteLine($"KNAPSACK CAPACITY: {model.SimulationParams.KnapsackCapacity}");
-            for (var i = 0; i < POPULATION; i++)
-            {
-                model.CalculateTime(ref population[i], selector);
-            }
+            var simulation = new Simulation(model, mutator, selector, popLogger, evaluator, crossoverSelector,
+                crossBreeder, populationGenerator);
+
+            simulation.Run(Config.Generations, Config.CrossoverProbability, Config.MutationProbability,
+                Config.Population);
+
             Console.WriteLine("FINITO");
             Console.Read();
         }

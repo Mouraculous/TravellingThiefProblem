@@ -4,6 +4,6 @@ namespace TravellingThief.Interfaces
 {
     public interface ITextToSimModelParser
     {
-        Simulation Parse(string[] text);
+        ISimulationParameters Parse(string[] text);
     }
 }

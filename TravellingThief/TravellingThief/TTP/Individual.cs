@@ -10,5 +10,7 @@ namespace TravellingThief.TTP
         public Item[] Picks { get; set; }
         public double Profit { get; set; }
         public double Time { get; set; }
+
+        public double Fitness { get; set; }
     }
 }

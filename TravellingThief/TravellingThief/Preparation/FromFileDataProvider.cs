@@ -9,7 +9,7 @@ namespace TravellingThief.Preparation
     {
         public IEnumerable<string> Get()
         {
-            var path = Directory.EnumerateFiles(Config.SimulationDataPath)?.First(f => f.Contains("hard"));
+            var path = Directory.EnumerateFiles(Config.SimulationDataPath)?.First(f => f.Contains("trivial"));
             return File.ReadAllLines(path);
         }
     }

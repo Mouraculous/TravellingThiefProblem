@@ -4,13 +4,12 @@ using System.Globalization;
 using System.Linq;
 using TravellingThief.Interfaces;
 using TravellingThief.Models;
-using TravellingThief.TTP;
 
 namespace TravellingThief.Preparation
 {
     public class TextToSimModelParser : ITextToSimModelParser
     {
-        public Simulation Parse(string[] text)
+        public ISimulationParameters Parse(string[] text)
         {
             var nfi = new NumberFormatInfo {NumberDecimalSeparator = "."};
 
@@ -34,7 +33,7 @@ namespace TravellingThief.Preparation
             model.Cities = cities;
             model.ItemsPerCity = (double) items.Length / cities.Length;
 
-            return new Simulation(model);
+            return model;
         }
 
         private static Item[] GetItems(IEnumerable<string> text, ref City[] cities, IFormatProvider nfi)

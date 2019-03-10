@@ -6,11 +6,11 @@ using TravellingThief.TTP;
 
 namespace TravellingThief.Preparation
 {
-    class Setup
+    public class PopulationGenerator : IPopulationGenerator
     {
         static Random rand = new Random();
 
-        public IEnumerable<Individual> GeneratePopulation(int size, SimulationParams sim)
+        public IEnumerable<Individual> GeneratePopulation(int size, ISimulationParameters sim)
         {
             var population = new List<Individual>();
             var array = new int[sim.CitiesAmount + 1];
