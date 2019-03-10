@@ -1,37 +1,14 @@
 ## Welcome to GitHub Pages
 
-You can use the [editor on GitHub](https://github.com/Mouraculous/travelling-thief-problem/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+This repository contains my proposition of a solution for Travelling Thief Problem (later called TTP).
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+The problem consists of two NP-Hard problems - Travelling Salesman Problem (TSP) and Knapsack Problem (KNP)
 
-### Markdown
+Solution is being developed as an evolutionary algorithm for TSP and greedy algorithm for KNP (for now)
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+Algorithm DOES NOT produce the optimal path and item configuration for the provided input, as genetic algorithms use randomization to provide you with a solution. The result of this algorithm is suboptimal (which is still very good, when we take execution time into the account)
 
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/Mouraculous/travelling-thief-problem/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+My approach:
+  1. Selection: Roulette (but I will implement Tournament eventually)
+  2. Mutation: Partial Reversal
+  3. Crossover: Partially Mapped Crossover (PMX)
