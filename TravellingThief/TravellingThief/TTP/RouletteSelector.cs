@@ -9,7 +9,7 @@ namespace TravellingThief.TTP
 {
     public class RouletteSelector : ICrossoverSelector
     {
-        private Random _random;
+        private readonly Random _random;
 
         public RouletteSelector()
         {

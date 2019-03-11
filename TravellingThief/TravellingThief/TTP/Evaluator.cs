@@ -29,10 +29,10 @@ namespace TravellingThief.TTP
             var profit = 0.0;
             var time = 0.0;
 
-            for (var i = 0; i < simulationParams.Cities.Length; i++)
-            {
-                result.Picks[i] = _itemSelector.SelectItemByPwRatio(simulationParams.Cities[result.Route[i] - 1]);
-            }
+            //for (var i = 0; i < simulationParams.Cities.Length; i++)
+            //{
+            //    result.Picks[i] = _itemSelector.SelectItemByPwRatio(simulationParams.Cities[result.Route[i] - 1]);
+            //}
 
             if (result.Picks.Sum(s => s?.Weight ?? 0) > simulationParams.KnapsackCapacity)
                 result.Picks = _itemSelector.FreeKnapsackSpace(result.Picks, simulationParams.KnapsackCapacity);
@@ -54,7 +54,7 @@ namespace TravellingThief.TTP
 
             result.Profit = profit;
             result.Time = time;
-            result.Fitness = profit - time;
+            result.Fitness = 10 * profit - 0.3 * time;
             return result;
         }
 

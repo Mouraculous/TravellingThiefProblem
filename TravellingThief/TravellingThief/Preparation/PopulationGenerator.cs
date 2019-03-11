@@ -14,7 +14,7 @@ namespace TravellingThief.Preparation
         {
             var population = new List<Individual>();
             var array = new int[sim.CitiesAmount + 1];
-            var items = new Item[sim.CitiesAmount];
+            var items = (Item[])sim.Items.Clone();
 
             for (var i = 0; i < sim.CitiesAmount; i++)
             {

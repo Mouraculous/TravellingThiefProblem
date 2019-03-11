@@ -12,11 +12,11 @@ namespace TravellingThief.Statistics
     {
         public void Log(int generation, IEnumerable<Individual> population)
         {
-            var path = Config.DumpFilePath;
+            var path = $"{Config.DumpFilePath}.csv";
 
             var listedPopulation = population.ToList();
 
-            if (!File.Exists(path + ".csv"))
+            if (!File.Exists(path))
             {
                 File.WriteAllText(path, "GENERATION; BEST RESULT; MEAN AVG; WORST RESULT\n");
             }
@@ -27,7 +27,7 @@ namespace TravellingThief.Statistics
                 listedPopulation.Min(m => m.Fitness)
             );
 
-            File.AppendText(toWrite);
+            File.AppendAllLines(path, new [] {toWrite});
         }
     }
 }

@@ -51,6 +51,7 @@ namespace TravellingThief.TTP
 
         public void Run(int generations, double crossoverProbability, double mutationProbability, int populationSize)
         {
+            _simulationParameters.Items = PickItemsGreedy();
             var initialPopulation = InitializePopulation(populationSize).ToList();
             initialPopulation = _evaluator.EvaluatePopulation(initialPopulation, _simulationParameters).ToList();
             _logger.Log(0, initialPopulation);
@@ -60,7 +61,9 @@ namespace TravellingThief.TTP
                 var currentPopulation = _selector.SelectIndividuals(initialPopulation).ToList();
 
                 currentPopulation.AddRange(_breeder.CrossOver(currentPopulation, crossoverProbability));
-                currentPopulation = FixPopulation(currentPopulation, populationSize).ToList();
+
+                if (currentPopulation.Count != populationSize)
+                    currentPopulation = FixPopulation(currentPopulation, populationSize).ToList();
 
                 currentPopulation = currentPopulation
                     .Select(s => _mutator
@@ -79,45 +82,29 @@ namespace TravellingThief.TTP
             return _populationGenerator.GeneratePopulation(size, _simulationParameters);
         }
 
-        private IEnumerable<Individual> FixPopulation(ICollection<Individual> populationToFix, int size)
+        private IEnumerable<Individual> FixPopulation(List<Individual> populationToFix, int size)
         {
-            populationToFix.ToList()
-                .AddRange(_populationGenerator
-                    .GeneratePopulation(
-                        size - populationToFix.Count,
-                        _simulationParameters));
+            if (populationToFix.Count > size) return populationToFix.Take(size);
+            var patch = _populationGenerator
+                .GeneratePopulation(
+                    size - populationToFix.Count,
+                    _simulationParameters)
+                .ToList();
+
+            populationToFix.AddRange(patch);
 
             return populationToFix;
         }
 
-        public void EvaluateIndividual(ref Individual individual, IItemSelector selector)
+        private Item[] PickItemsGreedy()
         {
-            var carrying = 0.0;
-            var profit = 0.0;
-            var time = 0.0;
-
+            var result = new Item[_simulationParameters.Cities.Length];
             for (var i = 0; i < _simulationParameters.Cities.Length; i++)
             {
-                individual.Picks[i] = selector.SelectItemByPwRatio(_simulationParameters.Cities[individual.Route[i] - 1]);
+                result[i] = _itemSelector.SelectItemByPwRatio(_simulationParameters.Cities[i]);
             }
 
-            if (individual.Picks.Sum(s => s?.Weight ?? 0) > _simulationParameters.KnapsackCapacity)
-                individual.Picks = selector.FreeKnapsackSpace(individual.Picks, _simulationParameters.KnapsackCapacity);
-
-            for (var i = 0; i < _simulationParameters.Cities.Length; i++)
-            {
-                var index = individual.Route[i];
-                var velocity = _simulationParameters.MaxSpeed - carrying * (_simulationParameters.MaxSpeed - _simulationParameters.MinSpeed) / _simulationParameters.KnapsackCapacity;
-                var dist = _simulationParameters.Cities[index - 1].CalculateDistance(_simulationParameters.Cities[individual.Route[i + 1] - 1]);
-                time += dist / velocity;
-
-                var item = individual.Picks.SingleOrDefault(s => s.NodeNumber == index);
-                carrying += item?.Weight ?? 0;
-                profit += item?.Profit ?? 0;
-            }
-
-            individual.Profit = profit;
-            individual.Time = time;
+            return result;
         }
     }
 }

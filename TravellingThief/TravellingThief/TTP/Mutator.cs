@@ -16,7 +16,7 @@ namespace TravellingThief.TTP
 
             return chance <= mutationProbability 
                 ? Mutate(individual) 
-                : new Individual();
+                : individual;
         }
 
         private Individual Mutate(Individual individual)
