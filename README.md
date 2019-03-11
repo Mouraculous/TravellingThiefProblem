@@ -13,4 +13,7 @@ My approach:
   2. Mutation: Partial Reversal
   3. Crossover: Partially Mapped Crossover (PMX)
 
-TODO: Change selection from this stupid method to proper elitism or sth else
+TODO: 
+Change selection from this stupid method to proper elitism or sth else.
+Fix Roulette.
+Mutation per gene, not per specimen.
