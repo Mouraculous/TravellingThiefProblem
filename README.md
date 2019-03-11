@@ -12,3 +12,5 @@ My approach:
   1. Selection: Roulette (but I will implement Tournament eventually)
   2. Mutation: Partial Reversal
   3. Crossover: Partially Mapped Crossover (PMX)
+
+TODO: Change selection from this stupid method to proper elitism or sth else
