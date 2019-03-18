@@ -18,3 +18,5 @@ Change selection from this stupid method to proper elitism or sth else.
 Fix Roulette.
 Mutation per gene, not per specimen.
 Crossover fix to not change the first and last node
+Create a dictionary (Specimen, Fitness) to limit the amount of fitness function calls
+
