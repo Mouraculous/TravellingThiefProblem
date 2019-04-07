@@ -12,11 +12,3 @@ My approach:
   1. Selection: Roulette (but I will implement Tournament eventually)
   2. Mutation: Partial Reversal
   3. Crossover: Partially Mapped Crossover (PMX)
-
-TODO: 
-Change selection from this stupid method to proper elitism or sth else.
-Fix Roulette.
-Mutation per gene, not per specimen.
-Crossover fix to not change the first and last node.
-Create a dictionary (Specimen, Fitness) to limit the amount of fitness function calls.
-
